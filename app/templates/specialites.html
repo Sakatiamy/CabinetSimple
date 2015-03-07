@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Page Specialites</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Specialites</h1>
+        <h3>Gestion des Specialites :</h3>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom </th>
+                        <th></th>
+                    </tr>
+                    <tr ng-repeat="specialite in listeSpecialites" ng-class-even="'even'" ng-class-odd="'odd'">
+                        <td>{{specialite.nom}}</td>
+                        <td><button ng-class="'bouton-supprimer'" ng-click="deleteSpecialite(specialite.id)">Supprimer</button></td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+        <h3>Formulaire pour ajouter une specialite :</h3>
+        <div>
+            <form role="form" ng-submit="createSpecialite()">
+                <div class="form-group">
+                    <label for="nom">Nom :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="nom"/>
+                </div>
+                <br>
+                <button type="submit" ng-class="'bouton-ajouter'">Ajouter</button>
+            </form>
+        </div>
+    </body>
+</html>

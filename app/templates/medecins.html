@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Page Medecin</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Medecins</h1>
+
+        <h3>Gestion des Medecins :</h3>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom </th>
+                        <th>Prenom </th>
+                        <th>Specialite </th>
+                        <th>Adresse </th>
+                        <th>CP </th>
+                        <th>Ville </th>
+                        <th>Tel </th>
+                        <th></th>
+                    </tr>
+                    <tr ng-repeat="medecin in listeMedecins" ng-class-even="'even'" ng-class-odd="'odd'">
+                        <td>{{medecin.nom}}</td>
+                        <td>{{medecin.prenom}}</td>
+                        <td>{{medecin.idSpecialite.nom}}</td>
+                        <td>{{medecin.adresse}}</td>
+                        <td>{{medecin.cp}}</td>
+                        <td>{{medecin.ville}}</td>
+                        <td>{{medecin.tel}}</td>
+                        <td><button ng-class="'bouton-supprimer'" ng-click="deleteMedecin(medecin.id)">Supprimer</button></td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+        <h3>Formulaire pour ajouter une medecin :</h3>
+        <div>
+            <form role="form" ng-submit="createMedecin()">
+                <div class="form-group">
+                    <label for="nom">Nom :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="nom"/>
+                </div>
+                <div class="form-group">
+                    <label for="prenom">Prenom :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="prenom"/>
+                </div>
+                <div class="form-group">
+                    <label for="specialite">Specialite :</label>
+                    <select ng-model="specialite" ng-options="s as s.nom for s in listeSpecialites" >    
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="adresse">Adresse :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="adresse"/>
+                </div>
+                <div class="form-group">
+                    <label for="cp">CP :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="cp"/>
+                </div>
+                <div class="form-group">
+                    <label for="nom">Ville :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="ville"/>
+                </div>
+                <div class="form-group">
+                    <label for="tel">Tel :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="tel"/>
+                </div>
+                <br>
+                <button type="submit" ng-class="'bouton-ajouter'">Ajouter</button>
+            </form>
+        </div>
+    </body>
+</html>
