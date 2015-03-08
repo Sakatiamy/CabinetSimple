@@ -5,7 +5,7 @@
  */
 
 
-app_controllers.controller("secretairesCtrl", function ($window, $scope, secretairesService) {
+app_controllers.controller("secretairesCtrl", function ($scope, secretairesService) {
     $scope.listeSecretaires = secretairesService.query();
 
     $scope.createSecretaire = function () {
@@ -21,19 +21,12 @@ app_controllers.controller("secretairesCtrl", function ($window, $scope, secreta
         };
         secretairesService.save({}, secretaire);
     };
-
     $scope.deleteSecretaire = function (id) {
         secretairesService.delete({id: id});
     };
     $scope.updateSecretaire = function (s) {
-        mydate = new Date($scope.newDateNaissance);
-        s.nom = $scope.newNom;
-        s.prenom = $scope.newPrenom;
+        mydate = new Date(s.dateNaissance);
         s.dateNaissance = mydate.toISOString();
-        s.adresse = $scope.newAdresse;
-        s.cp = $scope.newCP;
-        s.ville = $scope.newVille;
-        s.tel = $scope.newTel;
         secretairesService.update(s);
     };
 });

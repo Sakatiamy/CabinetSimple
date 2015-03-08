@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-app_controllers.controller("specialitesCtrl", function ($window, $scope, specialitesService) {
+app_controllers.controller("specialitesCtrl", function ($scope, specialitesService) {
     $scope.listeSpecialites = specialitesService.query();
 
     $scope.createSpecialite = function () {
@@ -13,12 +13,10 @@ app_controllers.controller("specialitesCtrl", function ($window, $scope, special
         };
         specialitesService.save({}, specialite);
     };
-
     $scope.deleteSpecialite = function (id) {
         specialitesService.delete({id: id});
     };
     $scope.updateSpecialite = function (s) {
-        s.nom = $scope.newNom;
         specialitesService.update(s);
     };
 });

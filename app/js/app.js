@@ -5,7 +5,8 @@ angular.module('myApp', [
     'ngRoute',
     'myApp.controllers',
     'myApp.services',
-    'myApp.version'
+    'myApp.version',
+    'ui.bootstrap'
 ]).
         config(['$routeProvider', function ($routeProvider) {
                 $routeProvider.when('/medecins', {

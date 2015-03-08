@@ -5,9 +5,8 @@
  */
 
 
-app_controllers.controller("medecinsCtrl", function ($window, $scope, medecinsService, specialitesService) {
+app_controllers.controller("medecinsCtrl", function ($scope, medecinsService, specialitesService) {
     $scope.listeMedecins = medecinsService.query();
-
     $scope.listeSpecialites = specialitesService.query();
 
     $scope.createMedecin = function () {
@@ -24,21 +23,12 @@ app_controllers.controller("medecinsCtrl", function ($window, $scope, medecinsSe
         };
         medecinsService.save({}, medecin);
     };
-
     $scope.deleteMedecin = function (id) {
         medecinsService.delete({id: id});
     };
-
     $scope.updateMedecin = function (m) {
-        mydate = new Date($scope.newDateNaissance);
-        m.nom = $scope.newNom;
-        m.prenom = $scope.newPrenom;
-        m.idSpecialite = $scope.newSpecialite;
+        mydate = new Date(m.dateNaissance);
         m.dateNaissance = mydate.toISOString();
-        m.adresse = $scope.newAdresse;
-        m.cp = $scope.newCP;
-        m.ville = $scope.newVille;
-        m.tel = $scope.newTel;
         medecinsService.update(m);
     };
 });

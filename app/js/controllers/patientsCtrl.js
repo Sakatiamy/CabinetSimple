@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 
-
-app_controllers.controller("patientsCtrl", function ($window, $scope, patientsService) {
+app_controllers.controller("patientsCtrl", function ($scope, patientsService) {
     $scope.listePatients = patientsService.query();
 
     $scope.createPatient = function () {
@@ -21,19 +20,18 @@ app_controllers.controller("patientsCtrl", function ($window, $scope, patientsSe
         };
         patientsService.save({}, patient);
     };
-
     $scope.deletePatient = function (id) {
         patientsService.delete({id: id});
     };
     $scope.updatePatient = function (p) {
-        mydate = new Date($scope.newDateNaissance);
-        p.nom = $scope.newNom;
-        p.prenom = $scope.newPrenom;
+        mydate = new Date(p.dateNaissance);
         p.dateNaissance = mydate.toISOString();
-        p.adresse = $scope.newAdresse;
-        p.cp = $scope.newCP;
-        p.ville = $scope.newVille;
-        p.tel = $scope.newTel;
         patientsService.update(p);
     };
+    $scope.dateChange = function(date){
+        mydate = new Date(date);
+        console.log(mydate);
+        console.loge(mydate.toTimeString());
+        
+    }
 });
