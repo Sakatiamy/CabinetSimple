@@ -14,9 +14,10 @@ and open the template in the editor.
         <h1>Patients</h1>
         <h3>Gestion des Patients :</h3>
         <div>
-            <table>
+            <table border="1">
                 <thead>
                     <tr>
+                        <th>ID </th>
                         <th>Nom </th>
                         <th>Prenom </th>
                         <th>Adresse </th>
@@ -26,6 +27,7 @@ and open the template in the editor.
                         <th></th>
                     </tr>
                     <tr ng-repeat="patient in listePatients" ng-class-even="'even'" ng-class-odd="'odd'">
+                        <td>{{patient.id}}</td>
                         <td>{{patient.nom}}</td>
                         <td>{{patient.prenom}}</td>
                         <td>{{patient.adresse}}</td>
@@ -38,7 +40,7 @@ and open the template in the editor.
             </table>
         </div>
 
-        <h3>Formulaire pour ajouter une patient :</h3>
+        <h3>Formulaire pour ajouter un patient :</h3>
         <div>
             <form role="form" ng-submit="createPatient()">
                 <div class="form-group">
@@ -49,6 +51,10 @@ and open the template in the editor.
                     <label for="prenom">Prenom :</label>
                     <input type="text" class="form-control" id="name" required ng-model="prenom"/>
                 </div>
+                <div class="form-group">
+                    <label for="date">Date de naissance :</label>
+                    <input type="date" class="form-control" id="date" required ng-model="dateNaissance"/>
+                </div> 
                 <div class="form-group">
                     <label for="adresse">Adresse :</label>
                     <input type="text" class="form-control" id="name" required ng-model="adresse"/>
@@ -67,6 +73,47 @@ and open the template in the editor.
                 </div>
                 <br>
                 <button type="submit" ng-class="'bouton-ajouter'">Ajouter</button>
+            </form>
+        </div>
+
+        <h3>Formulaire pour modifier un patient :</h3>
+        <div>
+            <form role="form" ng-submit="updatePatient(patient_choisi)">
+                <div class="form-group">
+                    <label for="patient">Patient :</label>
+                    <select ng-model="patient_choisi" ng-options="s as s.id for s in listePatients" >    
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nom">Nom :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="newNom"/>
+                </div>
+                <div class="form-group">
+                    <label for="prenom">Prenom :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="newPrenom"/>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date de naissance :</label>
+                    <input type="date" class="form-control" id="date" required ng-model="newDateNaissance"/>
+                </div>
+                <div class="form-group">
+                    <label for="adresse">Adresse :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="newAdresse"/>
+                </div>
+                <div class="form-group">
+                    <label for="cp">CP :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="newCP"/>
+                </div>
+                <div class="form-group">
+                    <label for="nom">Ville :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="newVille"/>
+                </div>
+                <div class="form-group">
+                    <label for="tel">Tel :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="newTel"/>
+                </div>
+                <br>
+                <button type="submit" ng-class="'bouton-modifier'">Modifier</button>
             </form>
         </div>
     </body>

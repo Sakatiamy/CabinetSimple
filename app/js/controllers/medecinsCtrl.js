@@ -6,18 +6,17 @@
 
 
 app_controllers.controller("medecinsCtrl", function ($window, $scope, medecinsService, specialitesService) {
-    //$scope.listeMedecins = medecinsService.findAll();
     $scope.listeMedecins = medecinsService.query();
+
     $scope.listeSpecialites = specialitesService.query();
-    $scope.listeMedecinsF = function () {
-        console.log(medecinsService.query());
-    };
-//    $scope.modifier = medecinsService.update(1)
+
     $scope.createMedecin = function () {
+        mydate = new Date($scope.dateNaissance);
         var medecin = {
             nom: $scope.nom,
             prenom: $scope.prenom,
             idSpecialite: $scope.specialite,
+            dateNaissance: mydate.toISOString(),
             adresse: $scope.adresse,
             cp: $scope.cp,
             ville: $scope.ville,
@@ -25,14 +24,21 @@ app_controllers.controller("medecinsCtrl", function ($window, $scope, medecinsSe
         };
         medecinsService.save({}, medecin);
     };
-    $scope.maj = function(){
-        $window.location.reload();
-    }
-    
+
     $scope.deleteMedecin = function (id) {
-        medecinsService.delete({id : id});
+        medecinsService.delete({id: id});
     };
-    $scope.updateMedecin = function (id) {
-//        medecinsService.update({id : id});
+
+    $scope.updateMedecin = function (m) {
+        mydate = new Date($scope.newDateNaissance);
+        m.nom = $scope.newNom;
+        m.prenom = $scope.newPrenom;
+        m.idSpecialite = $scope.newSpecialite;
+        m.dateNaissance = mydate.toISOString();
+        m.adresse = $scope.newAdresse;
+        m.cp = $scope.newCP;
+        m.ville = $scope.newVille;
+        m.tel = $scope.newTel;
+        medecinsService.update(m);
     };
 });

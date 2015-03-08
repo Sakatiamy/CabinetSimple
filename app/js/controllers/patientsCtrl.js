@@ -6,16 +6,14 @@
 
 
 app_controllers.controller("patientsCtrl", function ($window, $scope, patientsService) {
-    //$scope.listePatients = patientsService.findAll();
     $scope.listePatients = patientsService.query();
-    $scope.listePatientsF = function () {
-        console.log(patientsService.query());
-    };
-//    $scope.modifier = patientsService.update(1)
+
     $scope.createPatient = function () {
+        mydate = new Date($scope.dateNaissance);
         var patient = {
             nom: $scope.nom,
             prenom: $scope.prenom,
+            dateNaissance: mydate.toISOString(),
             adresse: $scope.adresse,
             cp: $scope.cp,
             ville: $scope.ville,
@@ -23,14 +21,19 @@ app_controllers.controller("patientsCtrl", function ($window, $scope, patientsSe
         };
         patientsService.save({}, patient);
     };
-    $scope.maj = function () {
-        $window.location.reload();
-    }
 
     $scope.deletePatient = function (id) {
         patientsService.delete({id: id});
     };
-    $scope.updatePatient = function (id) {
-//        patientsService.update({id : id});
+    $scope.updatePatient = function (p) {
+        mydate = new Date($scope.newDateNaissance);
+        p.nom = $scope.newNom;
+        p.prenom = $scope.newPrenom;
+        p.dateNaissance = mydate.toISOString();
+        p.adresse = $scope.newAdresse;
+        p.cp = $scope.newCP;
+        p.ville = $scope.newVille;
+        p.tel = $scope.newTel;
+        patientsService.update(p);
     };
 });

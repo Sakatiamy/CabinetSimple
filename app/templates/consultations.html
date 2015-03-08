@@ -15,9 +15,10 @@ and open the template in the editor.
         <h3>Gestion des Consultations :</h3>
 
         <div>
-            <table>
+            <table border="1">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Medecin</th>
                         <th>Patient</th>
                         <th>Secretaire</th>
@@ -26,12 +27,13 @@ and open the template in the editor.
                         <th></th>
                     </tr>
                     <tr ng-repeat="consultation in listeConsultations" ng-class-even="'even'" ng-class-odd="'odd'">
+                        <td>{{consultation.id}}</td>
                         <td>{{consultation.idMedecin.nom}}</td>
                         <td>{{consultation.idPatient.nom}}</td>
                         <td>{{consultation.idSecretaire.nom}}</td>
                         <td>{{consultation.idSalle.nom}}</td>
                         <td>{{consultation.date}}</td>
-                        <td><button ng-click="deleteConsultation(consultation.id)">Supprimer</button></td>
+                        <td><button ng-class="'bouton-supprimer'" ng-click="deleteConsultation(consultation.id)">Supprimer</button></td>
                     </tr>
                 </thead>
             </table>
@@ -68,5 +70,44 @@ and open the template in the editor.
                 <button type="submit" ng-class="'bouton-ajouter'">Ajouter</button>
             </form>
         </div>
+
+        <h3>Formulaire pour modifier une consultation:</h3>
+        <div>
+            <form role="form" ng-submit="updateConsultation(consultation_choisie)">
+                <div class="form-group">
+                    <label for="consultation">Consultation :</label>
+                    <select ng-model="consultation_choisie" ng-options="s as s.id for s in listeConsultations" >    
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="medecin">Medecin :</label>
+                    <select ng-model="newMedecin" ng-options="s as s.id for s in listeMedecins" >    
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="patient">Patient :</label>
+                    <select ng-model="newPatient" ng-options="s as s.id for s in listePatients" >    
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="secretaire">Secretaire :</label>
+                    <select ng-model="newSecretaire" ng-options="s as s.id for s in listeSecretaires" >    
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="salle">Salle :</label>
+                    <select ng-model="newSalle" ng-options="s as s.nom for s in listeSalles" >    
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date :</label>
+                    <input type="date" class="form-control" id="date" required ng-model="newDate"/>
+                </div>
+                <br>
+                <button type="submit" ng-class="'bouton-modifier'">Modifier</button>
+            </form>
+        </div>
+
+
     </body>
 </html>

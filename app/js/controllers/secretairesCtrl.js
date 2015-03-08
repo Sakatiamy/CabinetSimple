@@ -6,16 +6,14 @@
 
 
 app_controllers.controller("secretairesCtrl", function ($window, $scope, secretairesService) {
-    //$scope.listeSecretaires = secretairesService.findAll();
     $scope.listeSecretaires = secretairesService.query();
-    $scope.listeSecretairesF = function () {
-        console.log(secretairesService.query());
-    };
-//    $scope.modifier = secretairesService.update(1)
+
     $scope.createSecretaire = function () {
+        mydate = new Date($scope.dateNaissance);
         var secretaire = {
             nom: $scope.nom,
             prenom: $scope.prenom,
+            dateNaissance: mydate.toISOString(),
             adresse: $scope.adresse,
             cp: $scope.cp,
             ville: $scope.ville,
@@ -23,14 +21,19 @@ app_controllers.controller("secretairesCtrl", function ($window, $scope, secreta
         };
         secretairesService.save({}, secretaire);
     };
-    $scope.maj = function () {
-        $window.location.reload();
-    }
 
     $scope.deleteSecretaire = function (id) {
         secretairesService.delete({id: id});
     };
-    $scope.updateSecretaire = function (id) {
-//        secretairesService.update({id : id});
+    $scope.updateSecretaire = function (s) {
+        mydate = new Date($scope.newDateNaissance);
+        s.nom = $scope.newNom;
+        s.prenom = $scope.newPrenom;
+        s.dateNaissance = mydate.toISOString();
+        s.adresse = $scope.newAdresse;
+        s.cp = $scope.newCP;
+        s.ville = $scope.newVille;
+        s.tel = $scope.newTel;
+        secretairesService.update(s);
     };
 });

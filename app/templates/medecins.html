@@ -15,9 +15,10 @@ and open the template in the editor.
 
         <h3>Gestion des Medecins :</h3>
         <div>
-            <table>
+            <table border="1">
                 <thead>
                     <tr>
+                        <th>ID </th>
                         <th>Nom </th>
                         <th>Prenom </th>
                         <th>Specialite </th>
@@ -28,6 +29,7 @@ and open the template in the editor.
                         <th></th>
                     </tr>
                     <tr ng-repeat="medecin in listeMedecins" ng-class-even="'even'" ng-class-odd="'odd'">
+                        <td>{{medecin.id}}</td>
                         <td>{{medecin.nom}}</td>
                         <td>{{medecin.prenom}}</td>
                         <td>{{medecin.idSpecialite.nom}}</td>
@@ -58,6 +60,10 @@ and open the template in the editor.
                     </select>
                 </div>
                 <div class="form-group">
+                    <label for="date">Date de naissance :</label>
+                    <input type="date" class="form-control" id="date" required ng-model="dateNaissance"/>
+                </div>
+                <div class="form-group">
                     <label for="adresse">Adresse :</label>
                     <input type="text" class="form-control" id="name" required ng-model="adresse"/>
                 </div>
@@ -75,6 +81,52 @@ and open the template in the editor.
                 </div>
                 <br>
                 <button type="submit" ng-class="'bouton-ajouter'">Ajouter</button>
+            </form>
+        </div>
+
+        <h3>Formulaire pour modifier un medecin:</h3>
+        <div>
+            <form role="form" ng-submit="updateMedecin(medecin_choisi)">
+                <div class="form-group">
+                    <label for="patient">Medecin :</label>
+                    <select ng-model="medecin_choisi" ng-options="s as s.id for s in listeMedecins" >    
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nom">Nom :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="newNom"/>
+                </div>
+                <div class="form-group">
+                    <label for="prenom">Prenom :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="newPrenom"/>
+                </div>
+                <div class="form-group">
+                    <label for="specialite">Specialite :</label>
+                    <select ng-model="newSpecialite" ng-options="s as s.nom for s in listeSpecialites" >    
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date de naissance :</label>
+                    <input type="date" class="form-control" id="date" required ng-model="newDateNaissance"/>
+                </div> 
+                <div class="form-group">
+                    <label for="adresse">Adresse :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="newAdresse"/>
+                </div>
+                <div class="form-group">
+                    <label for="cp">CP :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="newCP"/>
+                </div>
+                <div class="form-group">
+                    <label for="nom">Ville :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="newVille"/>
+                </div>
+                <div class="form-group">
+                    <label for="tel">Tel :</label>
+                    <input type="text" class="form-control" id="name" required ng-model="newTel"/>
+                </div>
+                <br>
+                <button type="submit" ng-class="'bouton-modifier'">Modifier</button>
             </form>
         </div>
     </body>

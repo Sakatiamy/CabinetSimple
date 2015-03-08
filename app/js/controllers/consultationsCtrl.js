@@ -6,20 +6,14 @@
 
 
 app_controllers.controller("consultationsCtrl", function ($window, $scope, consultationsService, medecinsService, patientsService, sallesService, secretairesService) {
-    //$scope.listeConsultations = consultationsService.findAll();
     $scope.listeConsultations = consultationsService.query();
     $scope.listeMedecins = medecinsService.query();
     $scope.listePatients = patientsService.query();
     $scope.listeSalles = sallesService.query();
     $scope.listeSecretaires = secretairesService.query();
-    
-    $scope.listeConsultationsF = function () {
-        console.log(consultationsService.query());
-    };
-//    $scope.modifier = consultationsService.update(1)
+
     $scope.createConsultation = function () {
         mydate = new Date($scope.date);
-        console.log(mydate.toISOString())
         var consultation = {
             idMedecin: $scope.medecin,
             idPatient: $scope.patient,
@@ -29,14 +23,17 @@ app_controllers.controller("consultationsCtrl", function ($window, $scope, consu
         };
         consultationsService.save({}, consultation);
     };
-    $scope.maj = function(){
-        $window.location.reload();
-    }
     
     $scope.deleteConsultation = function (id) {
         consultationsService.delete({id : id});
     };
-    $scope.updateConsultation = function (id) {
-//        consultationsService.update({id : id});
+    $scope.updateConsultation = function (c) {
+        mydate = new Date($scope.newDate);
+        c.idMedecin = $scope.newMedecin;
+        c.idPatient = $scope.newPatient;
+        c.idSalle = $scope.newSalle;
+        c.idSecretaire = $scope.newSecretaire;
+        c.date = mydate.toISOString();
+        consultationsService.update(c);
     };
 });

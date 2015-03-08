@@ -6,7 +6,6 @@
 
 
 app_controllers.controller("sallesCtrl", function ($window, $scope, sallesService) {
-    //$scope.listeSalles = sallesService.findAll();
     $scope.listeSalles = sallesService.query();
     $scope.listeSallesF = function () {
         console.log(sallesService.query());
@@ -27,7 +26,8 @@ app_controllers.controller("sallesCtrl", function ($window, $scope, sallesServic
     $scope.deleteSalle = function (id) {
         sallesService.delete({id: id});
     };
-    $scope.updateSalle = function (id) {
-//        sallesService.update({id : id});
+    $scope.updateSalle = function (s) {
+        s.nom = $scope.newNom;
+        sallesService.update(s);
     };
 });
